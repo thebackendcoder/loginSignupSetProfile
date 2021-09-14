@@ -3,7 +3,7 @@ const register = require('./controllers/register')
 const login = require('./controllers/login');
 const setProfile = require('./controllers/setprofile');
 const mailVerified = require('./controllers/mailVerify')
-const isVerified = require('./services/isVerified')
+const isVerified = require('./services/isVerified');
 
 const router = express.Router();
 async function baseRoute(req, res){
