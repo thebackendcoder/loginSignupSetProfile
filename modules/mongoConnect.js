@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
-const dotenvJSON = require('dotenv-json');  // under observation? do we need in everyfile 
-const env = process.env.NODE_ENV || 'local'; // under observation ? same   
-dotenvJSON({ path: `./config.${env}.json` });  // under observation? same
 
-async function connectwithMongo() {
+async function connectwithMongo(app) {
 
     const dbString = process.env.dbString;
     console.log(dbString);

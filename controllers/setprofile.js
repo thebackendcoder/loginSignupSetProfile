@@ -1,13 +1,9 @@
 const model = require('../mongoSchema/mongoSchema')
-const dotenvJSON = require('dotenv-json');  // under observation? do we need in everyfile 
-const env = process.env.NODE_ENV || 'local'; // under observation ? same   
-dotenvJSON({ path: `./config.${env}.json` });  // under observation? same
 const jwt = require('jsonwebtoken');
 
 const jwtSecret = process.env.jwtSecret;
 
 async function setProfile(req, res) {
-    console.log("i am hit")
     try {
         let { token, name, surname, age, contactNumber, company, workExperience, designation, techStack } = req.body;
         const user = jwt.verify(token, jwtSecret);

@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const dotenvJSON = require('dotenv-json');
 const cors = require('cors');
-const connectwithMongo = require('./modules/mongoConnect');
-const router = require('./router.js')
+const dotenvJSON = require('dotenv-json');
 
 const env = process.env.NODE_ENV || 'local';
-const port = process.env.PORT || 8000;
 dotenvJSON({ path: `./config.${env}.json` });
+
+const connectwithMongo = require('./modules/mongoConnect');
+const router = require('./router.js')
+const port = process.env.PORT || 8000;
 
 
 app.use(bodyParser.json());

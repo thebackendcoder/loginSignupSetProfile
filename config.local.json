@@ -1,5 +1,10 @@
 {
     "dbString":"mongodb+srv://myuser:fathermother@learningcluster.6hufy.mongodb.net/myStartupUser?retryWrites=true&w=majority",
     "jwtSecret": "ksiufwifckjdsfcgeudgfciwdknjfuhuuhuhuh",
-    "baseUrl":"http://dusminute-env.eba-mqn3hg3m.ap-south-1.elasticbeanstalk.com"
+    "baseUrl":"http://localhost:8000",
+    "senderMail": "thebackendcoder@gmail.com"
 }
+
+
+
+

@@ -1,9 +1,6 @@
 const bcrypt = require('bcryptjs');
 const model = require('../mongoSchema/mongoSchema');
 const jwt = require('jsonwebtoken');
-const dotenvJSON = require('dotenv-json');  // under observation? do we need in everyfile 
-const env = process.env.NODE_ENV || 'local'; // under observation ? same   
-dotenvJSON({ path: `./config.${env}.json` });  // under observation? same
 const jwtSecret = process.env.jwtSecret;
 
 async function loginUser(req, res) {
@@ -26,6 +23,5 @@ async function loginUser(req, res) {
         });
     }
 }
-
 
 module.exports = loginUser
