@@ -11,7 +11,7 @@ dotenvJSON({ path: `./config.${env}.json` });
 //const connectwithMongo = require('./modules/mongoConnect');
 
 const router = require('./router.js')
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000;
 const dbString = process.env.dbString;
 mongoose.connect(dbString, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then((val => {
     console.log("connection establish to the database");

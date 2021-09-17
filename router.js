@@ -17,4 +17,5 @@ router.post('/loginUser', isVerified, login);
 router.post('/setProfile', setProfile);
 router.get('/verifyEmail', mailVerified);
 
+
 module.exports= router;

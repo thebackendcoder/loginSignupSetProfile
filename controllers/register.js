@@ -9,17 +9,24 @@ async function registerUser(req, res) {
   password = await bcrypt.hash(password, 10);
   let mailVerified = false;
   try {
-    const token = jwt.sign({
-      email,
-      password
-    }, jwtSecret);
-    const sesResponse = await mailService(email,token);
-    console.log(sesResponse);
     const dbResponse = await model.credModel.create({
       email,
       password,
       mailVerified
     })
+    const token = jwt.sign({
+      email,
+      password
+    }, jwtSecret);
+    const sesResponse = await mailService(email, token);
+    console.log(sesResponse);
+    /*
+    const dbResponse = await model.credModel.create({
+      email,
+      password,
+      mailVerified
+    })
+    */
     res.status(200).json({
       messgage: "Please verify your mail by clicking the link sent to our account"
     });

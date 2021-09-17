@@ -1,7 +1,7 @@
 {
     "dbString":"mongodb+srv://myuser:fathermother@learningcluster.6hufy.mongodb.net/myStartupUser?retryWrites=true&w=majority",
     "jwtSecret": "ksiufwifckjdsfcgeudgfciwdknjfuhuuhuhuh",
-    "baseUrl":"http://localhost:8000",
+    "baseUrl":"http://localhost:3000",
     "senderMail": "thebackendcoder@gmail.com"
 }
 
