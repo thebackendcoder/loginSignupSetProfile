@@ -4,7 +4,6 @@ const model = require('../mongoSchema/mongoSchema');
 
 async function mailVerified(req, res) {
     const token = req.query.token;
-    console.log("i am hit", token);
     try {
         const user = jwt.verify(token, jwtSecret);
         const email = user.email;
