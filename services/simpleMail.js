@@ -1,6 +1,10 @@
 const AWS = require('aws-sdk');
-const SES = new AWS.SES({ region: 'ap-south-1' });
-module.exports = SES;
+const SES = new AWS.SES({
+    region: 'ap-south-1', 
+    accessKeyId: process.env.accessKeyId,
+    secretAccessKey: process.env.secretAccessKey,
+});
+
 async function sendMail(senderMail, token) {
     console.log("mail ", senderMail);
     const verifyLink = `${process.env.baseUrl}/verifyEmail/?token=${token}`;
