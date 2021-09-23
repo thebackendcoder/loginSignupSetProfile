@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
 const userCred = new mongoose.Schema({
-    email:{type: String, required: true, unique: true},
+    userId:{type: String, required: true, unique: true},
     password: {type :String,require: true },
-    mailVerified:{type : Boolean}
 },{ collection: "usercredential" })
 
 const userProfile = new mongoose.Schema({
-    name: { type: String, required: true },
+    name: { type: String, },
     surname :{type: String},
     contactNumber: {type: Number },
     age: { type: Number},
@@ -16,7 +15,8 @@ const userProfile = new mongoose.Schema({
     designation:{ type: String, },
     techStack:{type: Array},
     userId: { type: String, unique: true },
-    email: { type : String}
+    email: { type : String},
+    mailVerified:{type : Boolean}
 }, { collection: "userProfile" });
 
 

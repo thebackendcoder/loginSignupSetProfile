@@ -5,28 +5,24 @@ const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.jwtSecret;
 
 async function registerUser(req, res) {
-  let { email, password } = req.body;
+  let {email,userId,password } = req.body;
   password = await bcrypt.hash(password, 10);
-  let mailVerified = false;
   try {
     const dbResponse = await model.credModel.create({
-      email,
+      userId,
       password,
-      mailVerified
     })
     const token = jwt.sign({
       email,
       password
     }, jwtSecret);
+    const dbResponse1 = await model.profileModel.create({
+        email: email,
+        userId: userId,
+        mailVerified: false 
+    })
     const sesResponse = await mailService(email, token);
     console.log(sesResponse);
-    /*
-    const dbResponse = await model.credModel.create({
-      email,
-      password,
-      mailVerified
-    })
-    */
     res.status(200).json({
       messgage: "Please verify your mail by clicking the link sent to our account"
     });

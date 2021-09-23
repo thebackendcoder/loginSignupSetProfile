@@ -1,8 +1,8 @@
 const model = require('../mongoSchema/mongoSchema');
 async function isVerified(req, res, next) {
 
-    const { email, password } = req.body;
-    const user = await model.credModel.findOne({ email }).lean();
+    const { userId, password } = req.body;
+    const user = await model.profileModel.findOne({ userId }).lean();
     if (!user) {
         res.status(404).json({ message: 'this user doesnt exist' });
     }

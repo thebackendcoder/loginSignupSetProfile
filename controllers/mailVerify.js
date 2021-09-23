@@ -8,14 +8,14 @@ async function mailVerified(req, res) {
         const user = jwt.verify(token, jwtSecret);
         const email = user.email;
 
-        const userResponse = await model.credModel.updateOne({ email }, {
+        const userResponse = await model.profileModel.updateOne({ email }, {
             $set: {
                 mailVerified: true
             }
         })
         console.log(userResponse);
         res.status(200).json({
-            message: "you have successfully veryfied the link"
+            message: "you have successfully verifiedyour mail"
         })
     }
     catch (err) {
