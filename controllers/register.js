@@ -21,6 +21,7 @@ async function registerUser(req, res) {
         userId: userId,
         mailVerified: false 
     })
+    console.log(dbResponse1);
     const sesResponse = await mailService(email, token);
     console.log(sesResponse);
     res.status(200).json({
@@ -28,6 +29,7 @@ async function registerUser(req, res) {
     });
   }
   catch (err) {
+    console.log(err)
     if (err.code == 11000) {
       res.status(404).json({
         message: 'user exists'

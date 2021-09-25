@@ -8,10 +8,11 @@ async function loginUser(req, res) {
     try {
         const user = await model.credModel.findOne({ userId }).lean();
         if (await bcrypt.compare(password, user.password)) {
+            let profileUser = await model.profileModel.findOne({ userId }).lean();
             const token = jwt.sign({
                 // eslint-disable-next-line no-underscore-dangle
-                id: user._id,
-                userId: user.userId
+                id: profileUser._id,
+                email: profileUser.email
             }, jwtSecret);
             console.log('the token is ', token);
             res.status(200).json({
@@ -26,7 +27,7 @@ async function loginUser(req, res) {
     }
     catch (err) {
         let errr = JSON.stringify(err);
-        res.status(400).json(errr);
+        res.status(400).json(err);
     }
 }
 
