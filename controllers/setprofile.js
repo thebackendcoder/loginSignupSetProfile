@@ -7,12 +7,13 @@ async function setProfile(req, res) {
     try {
         let { token, name, surname, age, contactNumber, company, workExperience, designation, techStack } = req.body;
         const user = jwt.verify(token, jwtSecret);
-        const { userId } = user;
-        const dbResponse = await model.profileModel.updateOne({ userId }, {
+        const { email } = user;
+        const dbResponse = await model.profileModel.updateOne({ email }, {
             $set: {
                 name,
                 surname,
                 contactNumber,
+                age,
                 company,
                 workExperience,
                 designation,

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.jwtSecret;
 
 async function registerUser(req, res) {
-  let {email,userId,password } = req.body;
+  let { email, userId, password } = req.body;
   password = await bcrypt.hash(password, 10);
   try {
     const dbResponse = await model.credModel.create({
@@ -17,9 +17,9 @@ async function registerUser(req, res) {
       password
     }, jwtSecret);
     const dbResponse1 = await model.profileModel.create({
-        email: email,
-        userId: userId,
-        mailVerified: false 
+      email: email,
+      userId: userId,
+      mailVerified: false
     })
     console.log(dbResponse1);
     const sesResponse = await mailService(email, token);
