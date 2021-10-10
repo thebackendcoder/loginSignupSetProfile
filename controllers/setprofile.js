@@ -7,19 +7,18 @@ async function setProfile(req, res) {
     try {
         let { token, name, surname, age, contactNumber, company, workExperience, designation, techStack } = req.body;
         const user = jwt.verify(token, jwtSecret);
-        const userId = user.id;
-        const email = user.username;
-        const dbResponse = await model.profileModel.create({
-            name,
-            surname,
-            age,
-            contactNumber,
-            company,
-            workExperience,
-            designation,
-            techStack,
-            userId,
-            email
+        const { email } = user;
+        const dbResponse = await model.profileModel.updateOne({ email }, {
+            $set: {
+                name,
+                surname,
+                contactNumber,
+                age,
+                company,
+                workExperience,
+                designation,
+                techStack
+            }
         })
         res.status(200).json({
             "message": "profile succesfully created"
