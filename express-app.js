@@ -11,13 +11,9 @@ dotenvJSON({ path: `./config.${env}.json` });
 //const connectwithMongo = require('./modules/mongoConnect');
 
 const router = require('./router.js')
-const port = process.env.PORT || 3000;
 const dbString = process.env.dbString;
 mongoose.connect(dbString, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then((val => {
-    console.log("connection establish to the database");
-    app.listen(port, () => {
-        console.log("listing")
-    })
+    console.log("connection establish to the database");  
 }));
 
 app.use(bodyParser.json());
@@ -30,10 +26,10 @@ app.use(cors());
 //connectwithMongo()
 
 app.use('/', router);
-
 app.get('*', (req, res) => {
     res.status(404).json({
         message: "bad Request"
     });
 });
 
+module.exports=app;

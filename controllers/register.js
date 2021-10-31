@@ -6,26 +6,23 @@ const jwtSecret = process.env.jwtSecret;
 
 async function registerUser(req, res) {
   let { email, userId, password } = req.body;
+  console.log("the email is -------------------", email)
   password = await bcrypt.hash(password, 10);
   try {
-    const dbResponse = await model.credModel.create({
-      userId,
-      password,
-    })
-    const token = jwt.sign({
-      email,
-      password
-    }, jwtSecret);
     const dbResponse1 = await model.profileModel.create({
       email: email,
       userId: userId,
+      password:password,
       mailVerified: false
     })
+    const token = jwt.sign({
+      id:dbResponse1._id
+    }, jwtSecret);
     console.log(dbResponse1);
     const sesResponse = await mailService(email, token);
     console.log(sesResponse);
     res.status(200).json({
-      messgage: "Please verify your mail by clicking the link sent to our account"
+      messgage: "Please verify your mail by clicking the link sent to your account"
     });
   }
   catch (err) {

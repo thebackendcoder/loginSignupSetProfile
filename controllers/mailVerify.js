@@ -6,16 +6,15 @@ async function mailVerified(req, res) {
     const token = req.query.token;
     try {
         const user = jwt.verify(token, jwtSecret);
-        const email = user.email;
-
-        const userResponse = await model.profileModel.updateOne({ email }, {
+        const _id = user.id;
+        const userResponse = await model.profileModel.updateOne({ _id }, {
             $set: {
                 mailVerified: true
             }
         })
         console.log(userResponse);
         res.status(200).json({
-            message: "you have successfully verifiedyour mail"
+            message: "you have successfully verified your email"
         })
     }
     catch (err) {
@@ -26,4 +25,4 @@ async function mailVerified(req, res) {
     }
 }
 
-module.exports= mailVerified;
+module.exports = mailVerified;

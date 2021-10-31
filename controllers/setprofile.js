@@ -5,10 +5,11 @@ const jwtSecret = process.env.jwtSecret;
 
 async function setProfile(req, res) {
     try {
-        let { token, name, surname, age, contactNumber, company, workExperience, designation, techStack } = req.body;
+        let token= req.header('auth-token');
+        let { name, surname, age, contactNumber, company, workExperience, designation, techStack } = req.body;
         const user = jwt.verify(token, jwtSecret);
-        const { email } = user;
-        const dbResponse = await model.profileModel.updateOne({ email }, {
+        const _id = user.id;
+        const dbResponse = await model.profileModel.updateOne({ _id }, {
             $set: {
                 name,
                 surname,

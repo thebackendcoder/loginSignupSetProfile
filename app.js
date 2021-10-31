@@ -1,20 +1,12 @@
-const cluster = require('cluster');
-const cpuCount = require('os').cpus().length;
+const serverless = require('serverless-http');
+const app = require('./express-app');
 
-if (cluster.isMaster) {
-  console.info(`Running cluster on CPU core : ${cpuCount}`);
-  for (let i = 0; i < cpuCount; i += 1) {
-    cluster.fork();
-  }
-  // Listen for dying workers
-  cluster.on('exit', (worker) => {
-    // Replace the dead worker, 
-    console.error(`Worker %d died , ${worker.id}`);
-    cluster.fork();
-  });
-} else {
-  // Include Express
-  // eslint-disable-next-line global-require
-  require('./express-app');
-  console.log('Worker %d running!', cluster.worker.id);
-}
+const handler = serverless(app);
+
+module.exports.handler = async (event, context) => {
+  // you can do other things here
+  const result = await handler(event, context);
+  // and here
+  return result;
+};
+
